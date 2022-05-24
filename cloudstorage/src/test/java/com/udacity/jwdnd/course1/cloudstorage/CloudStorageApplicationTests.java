@@ -130,7 +130,10 @@ class CloudStorageApplicationTests {
   public void testRedirection() {
     // Create a test account
     doMockSignUp("Redirection", "Test", "RT", "123");
-
+    WebDriverWait webDriverWait = new WebDriverWait(driver, 2);
+    webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success-msg")));
+    WebElement loginButton = driver.findElement(By.id("redirectLogin"));
+    loginButton.click();
     // Check if we have been redirected to the log in page.
     Assertions.assertEquals("http://localhost:" + this.port + "/login", driver.getCurrentUrl());
   }
@@ -154,7 +157,7 @@ class CloudStorageApplicationTests {
 
     // Try to access a random made-up URL.
     driver.get("http://localhost:" + this.port + "/some-random-page");
-    Assertions.assertFalse(driver.getPageSource().contains("Whitelabel Error Page"));
+    Assertions.assertTrue(driver.getPageSource().contains("Whitelabel Error Page"));
   }
 
 
@@ -190,7 +193,7 @@ class CloudStorageApplicationTests {
     } catch (org.openqa.selenium.TimeoutException e) {
       System.out.println("Large File upload failed");
     }
-    Assertions.assertFalse(driver.getPageSource().contains("HTTP Status 403 – Forbidden"));
+    Assertions.assertTrue(driver.getPageSource().contains("Whitelabel Error Page"));
 
   }
 

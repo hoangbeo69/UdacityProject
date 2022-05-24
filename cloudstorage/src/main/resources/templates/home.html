@@ -53,12 +53,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr th:each="file:${files}">
               <td>
-                <a class="btn btn-success" target="_blank">View</a>
-                <a class="btn btn-danger">Delete</a>
+                <a class="btn btn-success" th:href="@{'/file/download?fileId='+${file.getFileId()}}" target="_blank">View</a>
+                <a class="btn btn-danger" th:href="@{'/file/delete?fileId='+${file.getFileId()}}" target="_blank">Delete</a>
               </td>
-              <th scope="row">ExampleFile.txt</th>
+              <th scope="row" th:text="${file.getFileName()}">ExampleFile.txt</th>
             </tr>
             </tbody>
           </table>

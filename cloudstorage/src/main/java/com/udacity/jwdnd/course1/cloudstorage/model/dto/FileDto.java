@@ -17,7 +17,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 @Builder
 public class FileDto {
-  private String fileId;
+  private Integer fileId;
   private String fileName;
   private String contentType;
   private Long fileSize;
